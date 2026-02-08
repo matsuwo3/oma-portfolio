@@ -9,7 +9,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 const bentoCards = [
   {
     title: "戦略設計",
-    description: "ブランド戦略、集患設計、KPI策定",
+    description: "MVV策定、Go-To-Market戦略、KPI設計、中長期経営計画",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 12L7 2L12 12" />
@@ -21,8 +21,20 @@ const bentoCards = [
     color: "bg-accent-blue/10 text-accent-blue",
   },
   {
-    title: "プロダクト開発",
-    description: "Webアプリ、LP、管理ツール",
+    title: "デジタルマーケティング",
+    description: "広告運用、SEO/MEO、CRM/MA構築、データ分析",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3V21H21" />
+        <path d="M7 16L12 11L15 14L21 8" />
+        <path d="M17 8H21V12" />
+      </svg>
+    ),
+    color: "bg-accent-orange/10 text-accent-orange",
+  },
+  {
+    title: "プロダクト開発・AI活用",
+    description: "Webアプリ、LP制作、AI業務効率化、システム要件定義",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -34,25 +46,17 @@ const bentoCards = [
     ),
     color: "bg-accent-violet/10 text-accent-violet",
   },
-  {
-    title: "専門領域",
-    description: "医療広告ガイドライン、美容医療マーケ",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-        <path d="M2 17L12 22L22 17" />
-        <path d="M2 12L12 17L22 12" />
-      </svg>
-    ),
-    color: "bg-accent-orange/10 text-accent-orange",
-  },
 ];
 
 const skills = [
   "Google Ads",
+  "LINE Ads",
+  "TikTok Ads",
   "Meta Ads",
-  "LINE",
-  "SEO",
+  "SEO / MEO",
+  "CRM / MA",
+  "Python",
+  "SQL / BigQuery",
   "Next.js",
   "React",
   "AI / LLM",
@@ -87,8 +91,19 @@ export function About() {
           transition={{ delay: 0.1, duration: 0.5 }}
           className="mt-8 text-2xl font-bold tracking-tight text-text-primary md:text-3xl"
         >
-          顧客視点で、美容医療を変える
+          データと現場の両輪で、事業成長を加速させる
         </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary md:text-base"
+        >
+          定量・定性調査に加え、顧客インタビューや現場視察で生の声を掴みにいく。
+          戦略設計からLP制作・広告運用・CRM導入まで一気通貫。
+          必要なら何でもやる伴走型の支援スタイルで、事業フェーズに合わせた成長を実現します。
+        </motion.p>
 
         {/* Bento Grid with 3D tilt */}
         <div className="mt-12 grid gap-4 md:grid-cols-3">
