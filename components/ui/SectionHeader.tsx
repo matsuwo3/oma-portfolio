@@ -18,7 +18,7 @@ export function SectionHeader({ label, subtitle, className }: SectionHeaderProps
       className={`border-t border-black/[0.08] pt-8 ${className ?? ""}`}
     >
       <span className="section-label-lg block">{label}</span>
-      <span className="mt-1 block text-sm text-text-secondary">{subtitle}</span>
+      <span className="mt-1 block text-sm text-text-secondary md:text-base">{subtitle}</span>
     </motion.div>
   );
 }

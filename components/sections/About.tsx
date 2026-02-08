@@ -93,7 +93,7 @@ export function About() {
               <h3 className="mt-4 text-base font-bold text-text-primary">
                 {card.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary md:text-base">
                 {card.description}
               </p>
             </motion.div>
@@ -108,14 +108,14 @@ export function About() {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="mt-10"
         >
-          <p className="mb-3 text-xs font-semibold tracking-wider text-text-secondary">
+          <p className="mb-3 text-xs font-semibold tracking-wider text-text-secondary md:text-sm">
             SKILLS & TOOLS
           </p>
           <div className="flex flex-wrap gap-2">
             {skills.map((skill) => (
               <span
                 key={skill}
-                className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04]"
+                className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04] md:text-base"
               >
                 {skill}
               </span>

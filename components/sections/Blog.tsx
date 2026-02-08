@@ -38,7 +38,7 @@ export function Blog({ posts }: Props) {
                     {post.title}
                   </h3>
                   {cat && (
-                    <span className="mt-1 inline-block text-xs text-text-secondary">
+                    <span className="mt-1 inline-block text-xs text-text-secondary md:text-sm">
                       {cat}
                     </span>
                   )}
@@ -69,7 +69,7 @@ export function Blog({ posts }: Props) {
             href="https://note.com/nakanto_survey"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-14 items-center gap-2 rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+            className="inline-flex h-14 items-center gap-2 rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80 md:text-base"
           >
             noteで全記事を見る
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

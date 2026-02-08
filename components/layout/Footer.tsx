@@ -12,11 +12,11 @@ export function Footer() {
             height={24}
             className="h-6 w-6 rounded-lg object-cover"
           />
-          <span className="text-xs font-medium text-text-secondary">
+          <span className="text-xs font-medium text-text-secondary md:text-sm">
             おまポートフォリオ
           </span>
         </div>
-        <p className="text-xs text-text-secondary">
+        <p className="text-xs text-text-secondary md:text-sm">
           &copy; {new Date().getFullYear()} おま
         </p>
       </div>

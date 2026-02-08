@@ -51,7 +51,7 @@ export function Hero() {
               <span className="font-display text-3xl font-light tracking-tight text-text-primary md:text-5xl">
                 {stat.value}
               </span>
-              <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-text-secondary/60">
+              <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-text-secondary/60 md:text-xs">
                 {stat.label}
               </span>
               {i < stats.length - 1 && (
@@ -71,7 +71,7 @@ export function Hero() {
             className="mb-8 flex items-center gap-3"
           >
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
-            <span className="text-xs font-medium uppercase tracking-[0.15em] text-text-secondary">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-text-secondary md:text-sm">
               Available for Projects
             </span>
           </motion.div>
@@ -98,10 +98,10 @@ export function Hero() {
             <p className="text-sm font-semibold text-text-primary md:text-base">
               おま — 伴走型医療マーケター
             </p>
-            <p className="mt-1.5 text-sm text-text-secondary">
+            <p className="mt-1.5 text-sm text-text-secondary md:text-base">
               戦略設計〜現場が迷わず動ける仕組みづくり
             </p>
-            <p className="mt-1.5 text-xs text-text-secondary/70">
+            <p className="mt-1.5 text-xs text-text-secondary/70 md:text-sm">
               {career.join(" → ")}
             </p>
           </motion.div>
@@ -117,13 +117,13 @@ export function Hero() {
               href="https://forms.gle/4wXRSkuxtGMcBwk78"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-14 w-full items-center justify-center rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80 sm:w-auto"
+              className="inline-flex h-14 w-full items-center justify-center rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80 sm:w-auto md:text-base"
             >
               お問い合わせ
             </a>
             <a
               href="#works"
-              className="inline-flex h-14 w-full items-center justify-center rounded-full border border-black/10 px-10 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto"
+              className="inline-flex h-14 w-full items-center justify-center rounded-full border border-black/10 px-10 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto md:text-base"
             >
               実績を見る
             </a>

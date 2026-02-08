@@ -81,14 +81,14 @@ export function WorksGrid({ works }: Props) {
                   )}
                   <div className="p-5">
                     <div className="flex items-center gap-2">
-                      <span className={`inline-block rounded-lg px-2.5 py-1 text-xs font-semibold ${color}`}>
+                      <span className={`inline-block rounded-lg px-2.5 py-1 text-xs font-semibold md:text-sm ${color}`}>
                         {cat}
                       </span>
                     </div>
                     <h3 className="mt-2.5 text-base font-bold text-text-primary">
                       {work.title}
                     </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-text-secondary line-clamp-2">
+                    <p className="mt-1.5 text-sm leading-relaxed text-text-secondary line-clamp-2 md:text-base">
                       {work.description}
                     </p>
                     {tags.length > 0 && (
@@ -96,7 +96,7 @@ export function WorksGrid({ works }: Props) {
                         {tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-md bg-background px-2 py-0.5 text-xs text-text-secondary"
+                            className="rounded-md bg-background px-2 py-0.5 text-xs text-text-secondary md:text-sm"
                           >
                             {tag}
                           </span>
@@ -112,7 +112,7 @@ export function WorksGrid({ works }: Props) {
       </div>
 
       {filtered.length === 0 && (
-        <p className="mt-12 text-center text-sm text-text-secondary">
+        <p className="mt-12 text-center text-sm text-text-secondary md:text-base">
           該当する実績がありません
         </p>
       )}

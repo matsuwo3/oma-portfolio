@@ -74,7 +74,7 @@ export function Contact() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full border border-black/10 px-8 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto"
+                className="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full border border-black/10 px-8 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto md:text-base"
               >
                 {link.icon}
                 {link.label}
