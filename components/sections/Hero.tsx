@@ -127,20 +127,60 @@ export function Hero() {
             </span>
           </motion.div>
 
-          {/* Main Copy */}
+          {/* Main Copy — Typewriter reveal */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.1,
-              duration: 0.7,
-              ease: [0.25, 0.46, 0.45, 0.94] as const,
-            }}
+            initial="hidden"
+            animate="visible"
             className="text-[1.75rem] font-bold leading-[1.25] tracking-tight text-text-primary md:text-[3.5rem]"
           >
-            志ある専門家の価値を、
+            <motion.span
+              className="inline"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.06, delayChildren: 0.3 } },
+              }}
+            >
+              {[..."志ある専門家の価値を、"].map((char, i) => (
+                <motion.span
+                  key={`l1-${i}`}
+                  className="inline-block"
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </motion.span>
             <br />
-            <span className="text-text-secondary/40">正しく社会に届ける。</span>
+            <motion.span
+              className="inline text-text-secondary/40"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.06, delayChildren: 0.9 } },
+              }}
+            >
+              {[..."正しく社会に届ける。"].map((char, i) => (
+                <motion.span
+                  key={`l2-${i}`}
+                  className="inline-block"
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+              {/* Blinking cursor */}
+              <motion.span
+                className="ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[0.1em] bg-accent-blue md:w-[3px]"
+                variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 1.2, repeat: Infinity, delay: 1.8, ease: "linear" }}
+              />
+            </motion.span>
           </motion.h1>
 
           {/* Name + Career — inline typographic style */}
