@@ -83,9 +83,9 @@ export function Hero() {
             transition={{ delay: 0.1, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const }}
             className="text-[1.75rem] font-bold leading-[1.25] tracking-tight text-text-primary md:text-[3.5rem]"
           >
-            医療機関の集患と現場改善を、
+            志ある専門家の価値を、
             <br />
-            <span className="text-text-secondary/40">伴走で支援する。</span>
+            <span className="text-text-secondary/40">正しく社会に届ける。</span>
           </motion.h1>
 
           {/* Name + Career — inline typographic style */}
