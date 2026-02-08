@@ -13,14 +13,71 @@ type Props = {
   posts: BlogPost[];
 };
 
+function BlogCard({ post }: { post: BlogPost }) {
+  const cat = post.category[0] ?? "";
+  return (
+    <TiltCard className="overflow-hidden rounded-2xl" maxTilt={3}>
+      <a
+        href={post.noteUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-center gap-4 overflow-hidden rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04] transition-all hover:-translate-y-0.5 hover:shadow-md"
+      >
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-teal/10 text-accent-teal">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M4 4H16V16H4V4Z" />
+            <path d="M7 8H13" />
+            <path d="M7 11H11" />
+          </svg>
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-sm font-bold text-text-primary group-hover:text-accent-blue md:text-base">
+            {post.title}
+          </h3>
+          {cat && (
+            <span className="mt-1 inline-block text-xs text-text-secondary md:text-sm">
+              {cat}
+            </span>
+          )}
+        </div>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          className="shrink-0 text-text-secondary/40 transition-colors group-hover:text-accent-blue"
+        >
+          <path
+            d="M4 12L12 4M12 4H6M12 4V10"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </a>
+    </TiltCard>
+  );
+}
+
 export function BlogGrid({ posts }: Props) {
   const [expanded, setExpanded] = useState(false);
   const hasMore = posts.length > INITIAL_COUNT;
-  const visible = expanded ? posts : posts.slice(0, INITIAL_COUNT);
+  const initialPosts = posts.slice(0, INITIAL_COUNT);
+  const extraPosts = posts.slice(INITIAL_COUNT);
 
   return (
     <>
-      {/* Articles */}
+      {/* First 5 articles */}
       <motion.div
         className="mt-10 grid gap-4"
         variants={staggerContainer(0.06)}
@@ -28,68 +85,16 @@ export function BlogGrid({ posts }: Props) {
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
       >
-        {visible.map((post) => {
-          const cat = post.category[0] ?? "";
-          return (
-            <motion.div key={post.id} variants={fadeUpChild} className="min-w-0">
-              <TiltCard className="overflow-hidden rounded-2xl" maxTilt={3}>
-                <a
-                  href={post.noteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 overflow-hidden rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04] transition-all hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-teal/10 text-accent-teal">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 4H16V16H4V4Z" />
-                      <path d="M7 8H13" />
-                      <path d="M7 11H11" />
-                    </svg>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-sm font-bold text-text-primary group-hover:text-accent-blue md:text-base">
-                      {post.title}
-                    </h3>
-                    {cat && (
-                      <span className="mt-1 inline-block text-xs text-text-secondary md:text-sm">
-                        {cat}
-                      </span>
-                    )}
-                  </div>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    className="shrink-0 text-text-secondary/40 transition-colors group-hover:text-accent-blue"
-                  >
-                    <path
-                      d="M4 12L12 4M12 4H6M12 4V10"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </TiltCard>
-            </motion.div>
-          );
-        })}
+        {initialPosts.map((post) => (
+          <motion.div key={post.id} variants={fadeUpChild} className="min-w-0">
+            <BlogCard post={post} />
+          </motion.div>
+        ))}
       </motion.div>
 
-      {/* Expand hidden posts */}
+      {/* Expanded articles (6+) */}
       <AnimatePresence>
-        {expanded && posts.length > INITIAL_COUNT && (
+        {expanded && extraPosts.length > 0 && (
           <motion.div
             className="mt-4 grid gap-4"
             initial="hidden"
@@ -97,72 +102,20 @@ export function BlogGrid({ posts }: Props) {
             exit="hidden"
             variants={staggerContainer(0.06)}
           >
-            {posts.slice(INITIAL_COUNT).map((post) => {
-              const cat = post.category[0] ?? "";
-              return (
-                <motion.div
-                  key={post.id}
-                  className="min-w-0"
-                  variants={fadeUpChild}
-                >
-                  <TiltCard className="overflow-hidden rounded-2xl" maxTilt={3}>
-                    <a
-                      href={post.noteUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center gap-4 overflow-hidden rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04] transition-all hover:-translate-y-0.5 hover:shadow-md"
-                    >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-teal/10 text-accent-teal">
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M4 4H16V16H4V4Z" />
-                          <path d="M7 8H13" />
-                          <path d="M7 11H11" />
-                        </svg>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="truncate text-sm font-bold text-text-primary group-hover:text-accent-blue md:text-base">
-                          {post.title}
-                        </h3>
-                        {cat && (
-                          <span className="mt-1 inline-block text-xs text-text-secondary md:text-sm">
-                            {cat}
-                          </span>
-                        )}
-                      </div>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        className="shrink-0 text-text-secondary/40 transition-colors group-hover:text-accent-blue"
-                      >
-                        <path
-                          d="M4 12L12 4M12 4H6M12 4V10"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </a>
-                  </TiltCard>
-                </motion.div>
-              );
-            })}
+            {extraPosts.map((post) => (
+              <motion.div
+                key={post.id}
+                className="min-w-0"
+                variants={fadeUpChild}
+              >
+                <BlogCard post={post} />
+              </motion.div>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* "もっと見る" / Note CTA */}
+      {/* CTAs */}
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         {hasMore && !expanded && (
           <motion.button
