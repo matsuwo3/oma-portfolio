@@ -1,11 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+  useInView,
+} from "framer-motion";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const stats = [
-  { value: "8+", label: "Years" },
-  { value: "100+", label: "Clinics" },
-  { value: "5+", label: "Products" },
+  { value: 8, suffix: "+", label: "Years" },
+  { value: 100, suffix: "+", label: "Clinics" },
+  { value: 5, suffix: "+", label: "Products" },
 ];
 
 const career = [
@@ -15,27 +25,65 @@ const career = [
   "独立",
 ];
 
+function CountUpNumber({ target, suffix }: { target: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const motionVal = useMotionValue(0);
+  const springVal = useSpring(motionVal, { stiffness: 60, damping: 30 });
+  const [display, setDisplay] = useState("0" + suffix);
+
+  useEffect(() => {
+    if (isInView) motionVal.set(target);
+  }, [isInView, target, motionVal]);
+
+  useEffect(() => {
+    const unsub = springVal.on("change", (v) => {
+      setDisplay(Math.round(v) + suffix);
+    });
+    return unsub;
+  }, [springVal, suffix]);
+
+  return <span ref={ref}>{display}</span>;
+}
+
 export function Hero() {
+  const isMobile = useIsMobile();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const dot1Y = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const dot2Y = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const dot3Y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
   return (
-    <section className="relative flex min-h-screen items-end overflow-hidden px-6 pb-24 pt-20 md:items-center md:pb-16">
-      {/* Floating decorative dots */}
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen items-end overflow-hidden px-6 pb-24 pt-20 md:items-center md:pb-16"
+    >
+      {/* Floating decorative dots with parallax */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 0.6 }}
         transition={{ delay: 0.8, duration: 0.6, type: "spring" }}
         className="deco-dot absolute top-32 right-[12%] hidden h-5 w-5 bg-accent-blue md:block"
+        style={isMobile ? undefined : { y: dot1Y }}
       />
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 0.4 }}
         transition={{ delay: 1.0, duration: 0.6, type: "spring" }}
-        className="deco-dot absolute bottom-40 right-[22%] hidden h-7 w-7 bg-accent-orange md:block"
+        className="deco-dot deco-dot-alt absolute bottom-40 right-[22%] hidden h-7 w-7 bg-accent-orange md:block"
+        style={isMobile ? undefined : { y: dot2Y }}
       />
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 0.3 }}
         transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
         className="deco-dot absolute top-[45%] right-[8%] hidden h-4 w-4 border-2 border-accent-violet md:block"
+        style={isMobile ? undefined : { y: dot3Y }}
       />
 
       <div className="mx-auto w-full max-w-5xl">
@@ -49,7 +97,7 @@ export function Hero() {
           {stats.map((stat, i) => (
             <div key={stat.label} className="flex flex-col items-center">
               <span className="font-display text-3xl font-light tracking-tight text-text-primary md:text-5xl">
-                {stat.value}
+                <CountUpNumber target={stat.value} suffix={stat.suffix} />
               </span>
               <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-text-secondary/60 md:text-xs">
                 {stat.label}
@@ -67,7 +115,10 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+            transition={{
+              duration: 0.5,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
             className="mb-8 flex items-center gap-3"
           >
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
@@ -80,7 +131,11 @@ export function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+            transition={{
+              delay: 0.1,
+              duration: 0.7,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
             className="text-[1.75rem] font-bold leading-[1.25] tracking-tight text-text-primary md:text-[3.5rem]"
           >
             志ある専門家の価値を、
@@ -92,7 +147,11 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+            transition={{
+              delay: 0.3,
+              duration: 0.5,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
             className="mt-8 border-l-2 border-accent-blue pl-4"
           >
             <p className="text-sm font-semibold text-text-primary md:text-base">
@@ -110,23 +169,29 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+            transition={{
+              delay: 0.4,
+              duration: 0.5,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
             className="mt-10 flex flex-col gap-3 sm:flex-row"
           >
-            <a
+            <MagneticButton
               href="https://forms.gle/4wXRSkuxtGMcBwk78"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-14 w-full items-center justify-center rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80 sm:w-auto md:text-base"
+              strength={0.3}
             >
               お問い合わせ
-            </a>
-            <a
+            </MagneticButton>
+            <MagneticButton
               href="#works"
               className="inline-flex h-14 w-full items-center justify-center rounded-full border border-black/10 px-10 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto md:text-base"
+              strength={0.2}
             >
               実績を見る
-            </a>
+            </MagneticButton>
           </motion.div>
         </div>
       </div>

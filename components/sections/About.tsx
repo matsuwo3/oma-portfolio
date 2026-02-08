@@ -1,7 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const bentoCards = [
   {
@@ -57,10 +60,21 @@ const skills = [
 ];
 
 export function About() {
+  const isMobile = useIsMobile();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const dotY = useTransform(scrollYProgress, [0, 1], [20, -30]);
+
   return (
-    <section id="about" className="relative bg-bg-alt px-6 py-24 md:py-32">
-      {/* Floating dot */}
-      <div className="deco-dot absolute top-24 right-[10%] hidden h-4 w-4 bg-accent-blue opacity-50 md:block" />
+    <section ref={sectionRef} id="about" className="relative bg-bg-alt px-6 py-24 md:py-32">
+      {/* Floating dot with parallax */}
+      <motion.div
+        className="deco-dot absolute top-24 right-[10%] hidden h-4 w-4 bg-accent-blue opacity-50 md:block"
+        style={isMobile ? undefined : { y: dotY }}
+      />
 
       <div className="mx-auto w-full max-w-5xl">
         <SectionHeader label="ABOUT" subtitle="おまについて" />
@@ -76,31 +90,36 @@ export function About() {
           顧客視点で、美容医療を変える
         </motion.h2>
 
-        {/* Bento Grid */}
+        {/* Bento Grid with 3D tilt */}
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {bentoCards.map((card, i) => (
-            <motion.div
+            <TiltCard
               key={card.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-              className="rounded-2xl bg-white p-6 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
+              className="rounded-2xl"
+              maxTilt={6}
             >
-              <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${card.color}`}>
-                {card.icon}
-              </div>
-              <h3 className="mt-4 text-base font-bold text-text-primary">
-                {card.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary md:text-base">
-                {card.description}
-              </p>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+                className="h-full rounded-2xl bg-white p-6 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
+              >
+                <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${card.color}`}>
+                  {card.icon}
+                </div>
+                <h3 className="mt-4 text-base font-bold text-text-primary">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-secondary md:text-base">
+                  {card.description}
+                </p>
+              </motion.div>
+            </TiltCard>
           ))}
         </div>
 
-        {/* Skills */}
+        {/* Skills with hover effect */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,12 +132,14 @@ export function About() {
           </p>
           <div className="flex flex-wrap gap-2">
             {skills.map((skill) => (
-              <span
+              <motion.span
                 key={skill}
                 className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04] md:text-base"
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 {skill}
-              </span>
+              </motion.span>
             ))}
           </div>
         </motion.div>

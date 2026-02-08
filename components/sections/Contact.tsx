@@ -1,7 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const links = [
   {
@@ -27,11 +30,26 @@ const links = [
 ];
 
 export function Contact() {
+  const isMobile = useIsMobile();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const dot1Y = useTransform(scrollYProgress, [0, 1], [15, -25]);
+  const dot2Y = useTransform(scrollYProgress, [0, 1], [-10, 20]);
+
   return (
-    <section id="contact" className="relative bg-bg-alt px-6 py-24 md:py-32">
-      {/* Floating dots */}
-      <div className="deco-dot absolute top-28 right-[14%] hidden h-3 w-3 border-2 border-accent-blue opacity-40 md:block" />
-      <div className="deco-dot absolute bottom-24 right-[20%] hidden h-5 w-5 bg-accent-orange opacity-30 md:block" />
+    <section ref={sectionRef} id="contact" className="relative bg-bg-alt px-6 py-24 md:py-32">
+      {/* Floating dots with parallax */}
+      <motion.div
+        className="deco-dot absolute top-28 right-[14%] hidden h-3 w-3 border-2 border-accent-blue opacity-40 md:block"
+        style={isMobile ? undefined : { y: dot1Y }}
+      />
+      <motion.div
+        className="deco-dot deco-dot-alt absolute bottom-24 right-[20%] hidden h-5 w-5 bg-accent-orange opacity-30 md:block"
+        style={isMobile ? undefined : { y: dot2Y }}
+      />
 
       <div className="mx-auto w-full max-w-5xl">
         <SectionHeader label="CONTACT" subtitle="お仕事のご相談" />
@@ -50,11 +68,12 @@ export function Contact() {
 
           {/* Google Form CTA */}
           <div className="mt-10">
-            <a
+            <MagneticButton
               href="https://forms.gle/4wXRSkuxtGMcBwk78"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-16 w-full items-center justify-center gap-2.5 rounded-full bg-text-primary px-12 text-base font-semibold text-white transition-opacity hover:opacity-80 sm:w-auto"
+              strength={0.3}
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4H16V16H4V4Z" />
@@ -63,22 +82,23 @@ export function Contact() {
                 <path d="M7 14H10" />
               </svg>
               お問い合わせフォーム
-            </a>
+            </MagneticButton>
           </div>
 
           {/* SNS Links */}
           <div className="mt-4 flex flex-col gap-3 sm:flex-row">
             {links.map((link) => (
-              <a
+              <MagneticButton
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full border border-black/10 px-8 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto md:text-base"
+                strength={0.15}
               >
                 {link.icon}
                 {link.label}
-              </a>
+              </MagneticButton>
             ))}
           </div>
         </motion.div>

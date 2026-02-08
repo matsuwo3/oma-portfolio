@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import type { Work } from "@/lib/types";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 const categories = ["All", "Web App", "HP", "Mobile App"] as const;
 
@@ -59,11 +60,12 @@ export function WorksGrid({ works }: Props) {
               <motion.div
                 key={work.id}
                 layout
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: 0.35 }}
               >
+                <TiltCard className="rounded-2xl" maxTilt={5}>
                 <Link
                   href={`/works/${work.slug}`}
                   className="group block overflow-hidden rounded-2xl bg-white shadow-sm shadow-black/[0.04] transition-all hover:-translate-y-1 hover:shadow-lg"
@@ -105,6 +107,7 @@ export function WorksGrid({ works }: Props) {
                     )}
                   </div>
                 </Link>
+                </TiltCard>
               </motion.div>
             );
           })}

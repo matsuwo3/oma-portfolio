@@ -5,6 +5,8 @@ import { About } from "@/components/sections/About";
 import { Works } from "@/components/sections/Works";
 import { Blog } from "@/components/sections/Blog";
 import { Contact } from "@/components/sections/Contact";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { MorphingBlob } from "@/components/ui/MorphingBlob";
 import { getWorks, getBlogPosts } from "@/lib/microcms";
 
 export default async function Home() {
@@ -12,6 +14,8 @@ export default async function Home() {
 
   return (
     <>
+      <ScrollProgress />
+      <MorphingBlob />
       <Nav />
       <main>
         <Hero />

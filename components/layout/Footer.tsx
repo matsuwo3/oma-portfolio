@@ -1,8 +1,17 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="border-t border-black/[0.06] px-6 py-12">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="border-t border-black/[0.06] px-6 py-12"
+    >
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
         <div className="flex items-center gap-2">
           <Image
@@ -20,6 +29,6 @@ export function Footer() {
           &copy; {new Date().getFullYear()} おま
         </p>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

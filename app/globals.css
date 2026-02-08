@@ -41,8 +41,34 @@ h6 {
   user-select: none;
 }
 
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes float-y-alt {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+}
+
 .deco-dot {
   position: absolute;
   border-radius: 9999px;
   pointer-events: none;
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.deco-dot-alt {
+  animation-name: float-y-alt;
+  animation-duration: 8s;
 }

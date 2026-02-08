@@ -11,10 +11,10 @@ type SectionHeaderProps = {
 export function SectionHeader({ label, subtitle, className }: SectionHeaderProps) {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`border-t border-black/[0.08] pt-8 ${className ?? ""}`}
     >
       <span className="section-label-lg block">{label}</span>
