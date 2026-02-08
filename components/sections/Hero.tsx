@@ -10,8 +10,8 @@ const stats = [
 
 const career = [
   "広告代理店",
-  "大手美容外科",
-  "外コン",
+  "大手美容外科 マーケ統括",
+  "外資コンサル",
   "独立",
 ];
 
@@ -83,9 +83,9 @@ export function Hero() {
             transition={{ delay: 0.1, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const }}
             className="text-[1.75rem] font-bold leading-[1.25] tracking-tight text-text-primary md:text-[3.5rem]"
           >
-            クリーンな美容医療を、
+            医療機関の集患と現場改善を、
             <br />
-            <span className="text-text-secondary/40">マーケティングの力で。</span>
+            <span className="text-text-secondary/40">伴走で支援する。</span>
           </motion.h1>
 
           {/* Name + Career — inline typographic style */}
@@ -98,7 +98,10 @@ export function Hero() {
             <p className="text-sm font-semibold text-text-primary md:text-base">
               おま — 伴走型医療マーケター
             </p>
-            <p className="mt-2 text-sm text-text-secondary">
+            <p className="mt-1.5 text-sm text-text-secondary">
+              戦略設計〜現場が迷わず動ける仕組みづくり
+            </p>
+            <p className="mt-1.5 text-xs text-text-secondary/70">
               {career.join(" → ")}
             </p>
           </motion.div>

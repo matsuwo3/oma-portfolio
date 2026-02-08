@@ -22,7 +22,7 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "おま｜伴走型医療マーケター",
   description:
-    "クリーンな美容医療を、マーケティングの力で。戦略設計からプロダクト開発まで、美容医療業界に特化した伴走型マーケティング支援。",
+    "医療機関の集患と現場改善を伴走支援。戦略設計から現場が迷わず動ける仕組みづくりまで、美容医療に特化した伴走型マーケティング支援。",
 };
 
 export default function RootLayout({

@@ -44,8 +44,8 @@ export function Contact() {
           className="mt-8"
         >
           <p className="max-w-lg text-sm leading-relaxed text-text-secondary md:text-base">
-            美容医療クリニックのマーケティング戦略、プロダクト開発、
-            広告運用などお気軽にご相談ください。
+            医療機関の集患戦略、現場改善の仕組みづくり、
+            プロダクト開発などお気軽にご相談ください。
           </p>
 
           {/* Google Form CTA */}

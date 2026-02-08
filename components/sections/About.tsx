@@ -73,7 +73,7 @@ export function About() {
           transition={{ delay: 0.1, duration: 0.5 }}
           className="mt-8 text-2xl font-bold tracking-tight text-text-primary md:text-3xl"
         >
-          クリーンな美容医療業界を目指す
+          顧客視点で、美容医療を変える
         </motion.h2>
 
         {/* Bento Grid */}
