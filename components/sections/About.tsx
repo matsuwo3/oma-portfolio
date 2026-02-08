@@ -8,43 +8,22 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const bentoCards = [
   {
+    num: "01",
     title: "戦略設計",
     description: "MVV策定、Go-To-Market戦略、KPI設計、中長期経営計画",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 12L7 2L12 12" />
-        <path d="M7 12V22" />
-        <path d="M22 2L17 12V22" />
-        <path d="M17 8H22" />
-      </svg>
-    ),
-    color: "bg-accent-blue/10 text-accent-blue",
+    accent: "bg-accent-blue",
   },
   {
+    num: "02",
     title: "デジタルマーケティング",
     description: "広告運用、SEO/MEO、CRM/MA構築、データ分析",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 3V21H21" />
-        <path d="M7 16L12 11L15 14L21 8" />
-        <path d="M17 8H21V12" />
-      </svg>
-    ),
-    color: "bg-accent-orange/10 text-accent-orange",
+    accent: "bg-accent-orange",
   },
   {
+    num: "03",
     title: "プロダクト開発・AI活用",
     description: "Webアプリ、LP制作、AI業務効率化、システム要件定義",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21H16" />
-        <path d="M12 17V21" />
-        <path d="M7 8L10 11L7 14" />
-        <path d="M13 14H17" />
-      </svg>
-    ),
-    color: "bg-accent-violet/10 text-accent-violet",
+    accent: "bg-accent-violet",
   },
 ];
 
@@ -127,12 +106,13 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-                className="h-full rounded-2xl bg-white p-6 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
+                className="relative h-full overflow-hidden rounded-2xl bg-white p-6 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
               >
-                <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${card.color}`}>
-                  {card.icon}
-                </div>
-                <h3 className="mt-4 text-base font-bold text-text-primary">
+                <div className={`absolute top-0 left-0 h-full w-[3px] ${card.accent}`} />
+                <span className="font-display text-xs font-medium tracking-widest text-text-secondary/40">
+                  {card.num}
+                </span>
+                <h3 className="mt-3 text-base font-bold text-text-primary">
                   {card.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary md:text-base">
