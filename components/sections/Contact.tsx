@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const links = [
   {
@@ -27,33 +28,33 @@ const links = [
 
 export function Contact() {
   return (
-    <section id="contact" className="px-6 py-24 md:py-32">
-      <div className="mx-auto w-full max-w-3xl">
+    <section id="contact" className="relative bg-bg-alt px-6 py-24 md:py-32">
+      {/* Floating dots */}
+      <div className="deco-dot absolute top-28 right-[14%] hidden h-3 w-3 border-2 border-accent-blue opacity-40 md:block" />
+      <div className="deco-dot absolute bottom-24 right-[20%] hidden h-5 w-5 bg-accent-orange opacity-30 md:block" />
+
+      <div className="mx-auto w-full max-w-5xl">
+        <SectionHeader label="CONTACT" subtitle="お仕事のご相談" />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl bg-white p-8 text-center shadow-sm shadow-black/[0.04] md:p-12"
+          className="mt-8"
         >
-          <p className="text-sm font-semibold tracking-wider text-accent-blue">
-            CONTACT
-          </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-text-primary md:text-3xl">
-            お仕事のご相談
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-text-secondary md:text-base">
+          <p className="max-w-lg text-sm leading-relaxed text-text-secondary md:text-base">
             美容医療クリニックのマーケティング戦略、プロダクト開発、
             広告運用などお気軽にご相談ください。
           </p>
 
           {/* Google Form CTA */}
-          <div className="mt-8">
+          <div className="mt-10">
             <a
               href="https://forms.gle/4wXRSkuxtGMcBwk78"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-accent-blue px-7 text-sm font-semibold text-white transition-all hover:brightness-110 sm:w-auto"
+              className="inline-flex h-16 w-full items-center justify-center gap-2.5 rounded-full bg-text-primary px-12 text-base font-semibold text-white transition-opacity hover:opacity-80 sm:w-auto"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4H16V16H4V4Z" />
@@ -66,14 +67,14 @@ export function Contact() {
           </div>
 
           {/* SNS Links */}
-          <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
             {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-text-primary px-6 text-sm font-semibold text-white transition-opacity hover:opacity-80 sm:w-auto"
+                className="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full border border-black/10 px-8 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto"
               >
                 {link.icon}
                 {link.label}

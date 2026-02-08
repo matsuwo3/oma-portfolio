@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/types";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 type Props = {
   posts: BlogPost[];
@@ -6,14 +7,12 @@ type Props = {
 
 export function Blog({ posts }: Props) {
   return (
-    <section id="blog" className="px-6 py-24 md:py-32">
-      <div className="mx-auto w-full max-w-3xl">
-        <p className="text-center text-sm font-semibold tracking-wider text-accent-blue">
-          BLOG
-        </p>
-        <h2 className="mt-3 text-center text-2xl font-bold tracking-tight text-text-primary md:text-3xl">
-          ナレッジ発信
-        </h2>
+    <section id="blog" className="relative px-6 py-24 md:py-32">
+      {/* Floating dot */}
+      <div className="deco-dot absolute bottom-20 right-[12%] hidden h-4 w-4 bg-accent-teal opacity-50 md:block" />
+
+      <div className="mx-auto w-full max-w-5xl">
+        <SectionHeader label="BLOG" subtitle="ナレッジ発信" />
 
         {/* Articles */}
         <div className="mt-10 grid gap-4">
@@ -25,7 +24,7 @@ export function Blog({ posts }: Props) {
                 href={post.noteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 overflow-hidden rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
+                className="group flex items-center gap-4 overflow-hidden rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04] transition-all hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-teal/10 text-accent-teal">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -65,12 +64,12 @@ export function Blog({ posts }: Props) {
         </div>
 
         {/* Note CTA */}
-        <div className="mt-8 text-center">
+        <div className="mt-8">
           <a
             href="https://note.com/nakanto_survey"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-blue transition-opacity hover:opacity-70"
+            className="inline-flex h-14 items-center gap-2 rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80"
           >
             noteで全記事を見る
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

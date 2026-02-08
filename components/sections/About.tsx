@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const bentoCards = [
   {
@@ -55,28 +56,14 @@ const skills = [
   "Figma",
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
-  }),
-};
-
 export function About() {
   return (
-    <section id="about" className="px-6 py-24 md:py-32">
-      <div className="mx-auto w-full max-w-3xl">
-        {/* Section Label */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-sm font-semibold tracking-wider text-accent-blue"
-        >
-          ABOUT
-        </motion.p>
+    <section id="about" className="relative bg-bg-alt px-6 py-24 md:py-32">
+      {/* Floating dot */}
+      <div className="deco-dot absolute top-24 right-[10%] hidden h-4 w-4 bg-accent-blue opacity-50 md:block" />
+
+      <div className="mx-auto w-full max-w-5xl">
+        <SectionHeader label="ABOUT" subtitle="おまについて" />
 
         {/* Mission */}
         <motion.h2
@@ -84,7 +71,7 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className="mt-3 text-center text-2xl font-bold tracking-tight text-text-primary md:text-3xl"
+          className="mt-8 text-2xl font-bold tracking-tight text-text-primary md:text-3xl"
         >
           クリーンな美容医療業界を目指す
         </motion.h2>
@@ -94,11 +81,10 @@ export function About() {
           {bentoCards.map((card, i) => (
             <motion.div
               key={card.title}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              variants={fadeUp}
+              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
               className="rounded-2xl bg-white p-6 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
             >
               <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${card.color}`}>
@@ -120,16 +106,21 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="mt-10 flex flex-wrap justify-center gap-2"
+          className="mt-10"
         >
-          {skills.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04]"
-            >
-              {skill}
-            </span>
-          ))}
+          <p className="mb-3 text-xs font-semibold tracking-wider text-text-secondary">
+            SKILLS & TOOLS
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04]"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

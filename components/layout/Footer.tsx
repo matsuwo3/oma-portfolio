@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="px-6 py-8">
-      <div className="mx-auto flex w-full max-w-3xl items-center justify-between">
+    <footer className="border-t border-black/[0.06] px-6 py-12">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
         <div className="flex items-center gap-2">
           <Image
             src="/icon.webp"

@@ -29,12 +29,12 @@ export function WorksGrid({ works }: Props) {
   return (
     <>
       {/* Filter Tabs */}
-      <div className="mt-8 flex flex-wrap justify-center gap-2">
+      <div className="mt-8 flex flex-wrap gap-2">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActive(cat)}
-            className={`rounded-xl px-4 py-2 text-sm font-medium transition-all ${
+            className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
               active === cat
                 ? "bg-text-primary text-white shadow-sm"
                 : "bg-white text-text-secondary shadow-sm shadow-black/[0.04] hover:bg-black/[0.02]"
@@ -66,7 +66,7 @@ export function WorksGrid({ works }: Props) {
               >
                 <Link
                   href={`/works/${work.slug}`}
-                  className="group block overflow-hidden rounded-2xl bg-white shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
+                  className="group block overflow-hidden rounded-2xl bg-white shadow-sm shadow-black/[0.04] transition-all hover:-translate-y-1 hover:shadow-lg"
                 >
                   {work.thumbnail && (
                     <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
