@@ -63,6 +63,15 @@ const skills = [
   "Figma",
 ];
 
+const industries = [
+  "美容クリニック",
+  "人材派遣",
+  "外国人人材",
+  "整体・ボディケア",
+  "百貨店・小売",
+  "キャリア支援",
+];
+
 export function About() {
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
@@ -134,13 +143,38 @@ export function About() {
           ))}
         </div>
 
+        {/* Industries */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="mt-10"
+        >
+          <p className="mb-3 text-xs font-semibold tracking-wider text-text-secondary md:text-sm">
+            支援業界
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {industries.map((industry) => (
+              <motion.span
+                key={industry}
+                className="rounded-xl border border-black/[0.06] bg-white px-4 py-2 text-sm font-medium text-text-primary md:text-base"
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                {industry}
+              </motion.span>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Skills with hover effect */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="mt-10"
+          className="mt-8"
         >
           <p className="mb-3 text-xs font-semibold tracking-wider text-text-secondary md:text-sm">
             SKILLS & TOOLS
