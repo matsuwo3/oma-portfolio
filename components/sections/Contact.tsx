@@ -47,8 +47,26 @@ export function Contact() {
             広告運用などお気軽にご相談ください。
           </p>
 
-          {/* Links */}
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          {/* Google Form CTA */}
+          <div className="mt-8">
+            <a
+              href="https://forms.gle/4wXRSkuxtGMcBwk78"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-accent-blue px-7 text-sm font-semibold text-white transition-all hover:brightness-110 sm:w-auto"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4H16V16H4V4Z" />
+                <path d="M7 8H13" />
+                <path d="M7 11H13" />
+                <path d="M7 14H10" />
+              </svg>
+              お問い合わせフォーム
+            </a>
+          </div>
+
+          {/* SNS Links */}
+          <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
             {links.map((link) => (
               <a
                 key={link.label}

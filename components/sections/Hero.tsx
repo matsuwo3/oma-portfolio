@@ -120,7 +120,9 @@ export function Hero() {
           className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
           <a
-            href="#contact"
+            href="https://forms.gle/4wXRSkuxtGMcBwk78"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-accent-blue px-7 text-sm font-semibold text-white transition-all hover:brightness-110 sm:w-auto"
           >
             お問い合わせ
