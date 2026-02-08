@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const stats = [
   { value: "10+", label: "年の業界経験" },
-  { value: "50+", label: "クリニック支援" },
+  { value: "100+", label: "クリニック支援" },
   { value: "10+", label: "自社プロダクト" },
 ];
 
