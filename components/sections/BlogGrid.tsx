@@ -24,8 +24,8 @@ export function BlogGrid({ posts }: Props) {
         {posts.map((post) => {
           const cat = post.category[0] ?? "";
           return (
-            <motion.div key={post.id} variants={fadeUpChild}>
-              <TiltCard className="rounded-2xl" maxTilt={3}>
+            <motion.div key={post.id} variants={fadeUpChild} className="min-w-0">
+              <TiltCard className="overflow-hidden rounded-2xl" maxTilt={3}>
                 <a
                   href={post.noteUrl}
                   target="_blank"
