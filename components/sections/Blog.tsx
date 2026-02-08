@@ -25,7 +25,7 @@ export function Blog({ posts }: Props) {
                 href={post.noteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
+                className="group flex items-center gap-4 overflow-hidden rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04] transition-shadow hover:shadow-md"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-teal/10 text-accent-teal">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
