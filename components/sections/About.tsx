@@ -42,6 +42,25 @@ const skills = [
   "Figma",
 ];
 
+const careers = [
+  {
+    accent: "text-accent-blue",
+    text: "従業員数100名超のWEB広告代理店にてストラテジックプランニングと制作、運用を担当",
+  },
+  {
+    accent: "text-accent-orange",
+    text: "年間売上900億円規模の大手美容外科グループにてマーケティング統括。全国100院以上の広告戦略を統括",
+  },
+  {
+    accent: "text-accent-violet",
+    text: "外資系コンサルティングファームにて会社のリブランディングPJに従事",
+  },
+  {
+    accent: "text-accent-teal",
+    text: "独立後、累計30院の美容クリニック・歯科医院のマーケティングを支援。広告運用額は年間50億円",
+  },
+];
+
 const industries = [
   "クリニック",
   "歯科",
@@ -93,6 +112,36 @@ export function About() {
           戦略設計からLP制作・広告運用・CRM導入まで一気通貫。
           必要なら何でもやる伴走型の支援スタイルで、事業フェーズに合わせた成長を実現します。
         </motion.p>
+
+        {/* Career Highlights */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="mt-12"
+        >
+          <p className="mb-4 text-xs font-semibold tracking-wider text-text-secondary md:text-sm">
+            CAREER
+          </p>
+          <div className="grid gap-3 md:grid-cols-2">
+            {careers.map((career, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06, duration: 0.5 }}
+                className="flex items-start gap-3 rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04]"
+              >
+                <span className={`mt-0.5 text-lg font-bold leading-none ${career.accent}`}>—</span>
+                <p className="text-sm leading-relaxed text-text-primary md:text-base">
+                  {career.text}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Bento Grid with 3D tilt */}
         <div className="mt-12 grid gap-4 md:grid-cols-3">
