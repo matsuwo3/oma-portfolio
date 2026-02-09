@@ -15,14 +15,22 @@
 
 ## Architecture
 - /app
-  - /page.tsx              → トップページ（全セクション）
+  - /page.tsx              → トップページ（ScrollProgress, MorphingBlob, 全セクション）
   - /works/[slug]/page.tsx → 実績詳細
-  - /layout.tsx            → 共通レイアウト
+  - /blog/[slug]/page.tsx  → ブログ記事詳細
+  - /layout.tsx            → 共通レイアウト（Nav, Footer）
   - /api/revalidate/route.ts → microCMS Webhook受信
 - /components
-  - /sections  → Hero, About, Works, Blog, Contact
-  - /ui        → 共通UIコンポーネント
+  - /sections  → Hero, About, Works, WorksGrid, Blog, BlogGrid, Contact
+  - /ui        → ScrollProgress, MorphingBlob, TiltCard, MagneticButton, ParallaxDot, SectionHeader
   - /layout    → Nav, Footer
+- /hooks
+  - animations.ts       → 共有spring設定、easing、stagger/fadeUpバリアント
+  - useIsMobile.ts      → PC/モバイル判定（重いエフェクトのゲート）
+  - useParallax.ts      → スクロール連動パララックス
+  - useMagneticCursor.ts → マグネティックカーソル追従
+  - useTiltCard.ts      → 3Dチルトホバー
+  - useCountUp.ts       → 数値カウントアップ
 - /lib
   - microcms.ts  → microCMS API client
   - types.ts     → 型定義
@@ -44,7 +52,8 @@ Google×Apple風のクリーンで上品なデザイン。
   - orange: #f56300（HP）
   - violet: #8944e7（Mobile App）
   - teal: #30b0c7
-- アニメーション: 控えめで上品（Framer Motion）
+- アニメーション: Framer Motion（パララックス、3Dチルト、マグネティック、タイプライター等）
+- 重いエフェクトはPC限定（useIsMobile()でゲート）、モバイルはplain要素フォールバック
 - レスポンシブ: モバイルファースト、md: ブレークポイント(768px)
 
 ## microCMS
@@ -52,7 +61,9 @@ Google×Apple風のクリーンで上品なデザイン。
 - API Key: 環境変数 MICROCMS_API_KEY
 - Endpoints:
   - works: 実績一覧（フィールド: title, slug, category, description, body, thumbnail, tags, url, featured）
-  - blog: note記事リンク一覧（フィールド: title, category, noteUrl）
+  - blog: ブログ記事（フィールド: title, slug, category, isExternal, noteUrl, description, body, thumbnail, tags）
+    - isExternal=true: Note記事リンク（noteUrl使用）
+    - isExternal=false: 内部記事（body使用、/blog/[slug]で表示）
 - tagsはカンマ区切りテキスト。コード側で.split(",")して配列化
 
 ## Code Style
@@ -60,3 +71,9 @@ Google×Apple風のクリーンで上品なデザイン。
 - any禁止
 - Server Components デフォルト、インタラクティブ部分のみ 'use client'
 - Tailwindユーティリティクラスで完結させる（インラインstyle最小限）
+
+## デザイン決定事項
+- ベントカード: SVGアイコン不使用 → ナンバリング(01/02/03)+左端カラーライン
+- Hero見出し: タイプライター(1文字ずつfadeUp) + 末尾ブルーカーソル点滅
+- Blog: 5件超は「もっと見る」ボタンで展開
+- AI生成感のあるSVGアイコンは使わない方針

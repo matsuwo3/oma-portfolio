@@ -34,8 +34,13 @@ export async function getBlogPosts() {
     endpoint: "blog",
     queries: {
       orders: "-publishedAt",
-      limit: 20,
+      limit: 50,
     },
   });
   return data.contents;
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  const posts = await getBlogPosts();
+  return posts.find((p) => p.slug === slug) ?? null;
 }

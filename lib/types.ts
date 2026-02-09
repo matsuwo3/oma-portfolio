@@ -16,8 +16,29 @@ export type Work = {
   featured?: boolean;
 } & MicroCMSListContent;
 
-export type BlogPost = {
+type BlogPostBase = {
   title: string;
+  slug: string;
   category: string[];
-  noteUrl: string;
+  description?: string;
+  thumbnail?: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  tags?: string;
 } & MicroCMSListContent;
+
+type ExternalBlogPost = BlogPostBase & {
+  isExternal: true;
+  noteUrl: string;
+  body?: undefined;
+};
+
+type InternalBlogPost = BlogPostBase & {
+  isExternal: false;
+  noteUrl?: undefined;
+  body: string;
+};
+
+export type BlogPost = ExternalBlogPost | InternalBlogPost;
