@@ -25,15 +25,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const encodedCat = encodeURIComponent(category);
 
   return {
-    title: `${category}の記事一覧｜おまブログ`,
-    description: `${category}に関するブログ記事一覧。伴走型医療マーケター「おま」のナレッジ発信。`,
+    title: `${category}の記事一覧｜おまコラム`,
+    description: `${category}に関するコラム記事一覧。伴走型医療マーケター「おま」のナレッジ発信。`,
     alternates: {
       canonical: `${SITE_URL}/blog/category/${encodedCat}/`,
     },
     openGraph: {
       type: "website",
-      title: `${category}の記事一覧｜おまブログ`,
-      description: `${category}に関するブログ記事一覧。`,
+      title: `${category}の記事一覧｜おまコラム`,
+      description: `${category}に関するコラム記事一覧。`,
       url: `${SITE_URL}/blog/category/${encodedCat}/`,
       siteName: "おま｜伴走型医療マーケター",
     },
@@ -56,7 +56,7 @@ export default async function CategoryPage({ params }: Props) {
         <div className="mx-auto w-full max-w-5xl">
           {/* Header */}
           <div className="border-t border-black/[0.08] pt-8">
-            <span className="section-label-lg block">BLOG</span>
+            <span className="section-label-lg block">COLUMN</span>
             <span className="mt-1 block text-sm text-text-secondary md:text-base">
               {category}の記事一覧
             </span>
@@ -103,7 +103,7 @@ export default async function CategoryPage({ params }: Props) {
                   strokeLinejoin="round"
                 />
               </svg>
-              全記事一覧へ
+              コラム一覧へ
             </Link>
           </div>
         </div>

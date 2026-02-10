@@ -18,7 +18,7 @@ export function Blog({ posts }: Props) {
       />
 
       <div className="mx-auto w-full max-w-5xl">
-        <SectionHeader label="BLOG" subtitle="ナレッジ発信" />
+        <SectionHeader label="COLUMN" subtitle="ナレッジ発信" />
         <BlogGrid posts={posts} />
       </div>
     </section>

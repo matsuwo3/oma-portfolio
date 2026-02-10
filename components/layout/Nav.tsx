@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
   { label: "About", href: "/about/", scrollTarget: "#about" },
   { label: "Works", href: "/works/", scrollTarget: "#works" },
-  { label: "Blog", href: "/blog/", scrollTarget: "#blog" },
+  { label: "Column", href: "/blog/", scrollTarget: "#blog" },
   { label: "Contact", href: "/contact/", scrollTarget: "#contact" },
 ];
 

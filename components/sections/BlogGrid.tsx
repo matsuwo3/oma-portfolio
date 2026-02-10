@@ -131,7 +131,7 @@ export function BlogGrid({ posts }: Props) {
           className="inline-flex h-14 items-center gap-2 rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80 md:text-base"
           strength={0.25}
         >
-          {hasMore ? "もっと見る" : "ブログ一覧を見る"}
+          {hasMore ? "もっと見る" : "コラム一覧を見る"}
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path
               d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5"

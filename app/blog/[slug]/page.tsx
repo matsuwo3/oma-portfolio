@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getBlogPostBySlug(slug);
   if (!post || post.isExternal) return { title: "Not Found" };
 
-  const description = post.description ?? `${post.title} - おまのブログ記事`;
+  const description = post.description ?? `${post.title} - おまのコラム記事`;
 
   return {
-    title: `${post.title}｜おまブログ`,
+    title: `${post.title}｜おまコラム`,
     description,
     alternates: {
       canonical: `${SITE_URL}/blog/${slug}`,
@@ -66,6 +66,7 @@ const categoryColor: Record<string, string> = {
   SEO: "bg-accent-blue/10 text-accent-blue",
   マーケティング: "bg-accent-orange/10 text-accent-orange",
   医療広告: "bg-accent-violet/10 text-accent-violet",
+  Note記事: "bg-accent-teal/10 text-accent-teal",
 };
 
 function extractHeadings(html: string) {
@@ -173,7 +174,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 strokeLinejoin="round"
               />
             </svg>
-            ブログ一覧へ
+            コラム一覧へ
           </Link>
 
           {/* Header */}
