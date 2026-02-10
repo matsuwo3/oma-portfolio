@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
   revalidatePath("/column", "page");
   revalidatePath("/column/[slug]", "page");
   revalidatePath("/column/category/[cat]", "page");
+  revalidatePath("/sitemap.xml");
 
   return NextResponse.json({ revalidated: true });
 }
