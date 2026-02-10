@@ -16,32 +16,33 @@ type Props = {
 
 export async function generateStaticParams() {
   const categories = await getBlogCategories();
-  return categories.map((cat) => ({ cat: encodeURIComponent(cat) }));
+  return categories.map((cat) => ({ cat }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { cat: rawCat } = await params;
-  const category = decodeURIComponent(rawCat);
+  const { cat } = await params;
+  const category = decodeURIComponent(cat);
+  const encodedCat = encodeURIComponent(category);
 
   return {
     title: `${category}の記事一覧｜おまブログ`,
     description: `${category}に関するブログ記事一覧。伴走型医療マーケター「おま」のナレッジ発信。`,
     alternates: {
-      canonical: `${SITE_URL}/blog/category/${rawCat}/`,
+      canonical: `${SITE_URL}/blog/category/${encodedCat}/`,
     },
     openGraph: {
       type: "website",
       title: `${category}の記事一覧｜おまブログ`,
       description: `${category}に関するブログ記事一覧。`,
-      url: `${SITE_URL}/blog/category/${rawCat}/`,
+      url: `${SITE_URL}/blog/category/${encodedCat}/`,
       siteName: "おま｜伴走型医療マーケター",
     },
   };
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const { cat: rawCat } = await params;
-  const category = decodeURIComponent(rawCat);
+  const { cat } = await params;
+  const category = decodeURIComponent(cat);
 
   const [posts, allCategories] = await Promise.all([
     getBlogPostsByCategory(category),
