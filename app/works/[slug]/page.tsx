@@ -59,7 +59,7 @@ export default async function WorkDetailPage({ params }: Props) {
         <article className="mx-auto w-full max-w-2xl">
           {/* Back link */}
           <Link
-            href="/#works"
+            href="/works/"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

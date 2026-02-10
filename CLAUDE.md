@@ -18,6 +18,7 @@
 |---|---|
 | `/` | トップページ（全セクション） |
 | `/about/` | E-E-A-T強化の独立プロフィールページ |
+| `/works/` | 実績・プロダクト一覧 |
 | `/works/[slug]/` | 実績詳細 |
 | `/blog/` | ブログ記事一覧 |
 | `/blog/[slug]/` | ブログ記事詳細 |
@@ -28,6 +29,7 @@
 - /app
   - /page.tsx              → トップページ（ScrollProgress, MorphingBlob, 全セクション）
   - /about/page.tsx        → Aboutページ（プロフィール、経歴タイムライン、JSON-LD ProfilePage）
+  - /works/page.tsx        → 実績・プロダクト一覧（カテゴリフィルタ付き）
   - /works/[slug]/page.tsx → 実績詳細
   - /blog/page.tsx         → ブログ記事一覧（カテゴリフィルタ付き）
   - /blog/[slug]/page.tsx  → ブログ記事詳細
