@@ -9,7 +9,7 @@ type Props = {
 
 export function Blog({ posts }: Props) {
   return (
-    <section id="blog" className="relative overflow-hidden px-6 py-24 md:py-32">
+    <section id="column" className="relative overflow-hidden px-6 py-24 md:py-32">
       {/* Floating dot with parallax */}
       <ParallaxDot
         className="absolute bottom-20 right-[12%] hidden h-4 w-4 bg-accent-teal opacity-50 md:block"

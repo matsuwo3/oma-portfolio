@@ -89,7 +89,7 @@ function BlogCard({ post }: { post: BlogPost }) {
       {cardContent}
     </a>
   ) : (
-    <Link href={`/blog/${post.slug}`} className={cardClassName}>
+    <Link href={`/column/${post.slug}`} className={cardClassName}>
       {cardContent}
     </Link>
   );

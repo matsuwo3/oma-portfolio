@@ -28,13 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${category}の記事一覧｜おまコラム`,
     description: `${category}に関するコラム記事一覧。伴走型医療マーケター「おま」のナレッジ発信。`,
     alternates: {
-      canonical: `${SITE_URL}/blog/category/${encodedCat}/`,
+      canonical: `${SITE_URL}/column/category/${encodedCat}/`,
     },
     openGraph: {
       type: "website",
       title: `${category}の記事一覧｜おまコラム`,
       description: `${category}に関するコラム記事一覧。`,
-      url: `${SITE_URL}/blog/category/${encodedCat}/`,
+      url: `${SITE_URL}/column/category/${encodedCat}/`,
       siteName: "おま｜伴走型医療マーケター",
     },
   };
@@ -65,7 +65,7 @@ export default async function CategoryPage({ params }: Props) {
           {/* Category Links */}
           <div className="mt-8 flex flex-wrap gap-2">
             <Link
-              href="/blog/"
+              href="/column/"
               className="rounded-full bg-white px-5 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04] transition-colors hover:bg-black/[0.02]"
             >
               All
@@ -73,7 +73,7 @@ export default async function CategoryPage({ params }: Props) {
             {allCategories.map((cat) => (
               <Link
                 key={cat}
-                href={`/blog/category/${encodeURIComponent(cat)}/`}
+                href={`/column/category/${encodeURIComponent(cat)}/`}
                 className={`rounded-full px-5 py-2 text-sm font-medium shadow-sm ${
                   cat === category
                     ? "bg-text-primary text-white"
@@ -91,7 +91,7 @@ export default async function CategoryPage({ params }: Props) {
           {/* Back to all */}
           <div className="mt-12">
             <Link
-              href="/blog/"
+              href="/column/"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

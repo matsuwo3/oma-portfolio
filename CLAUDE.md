@@ -21,9 +21,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `/about/` | E-E-A-T強化の独立プロフィールページ |
 | `/works/` | 実績・プロダクト一覧 |
 | `/works/[slug]/` | 実績詳細 |
-| `/blog/` | コラム記事一覧 |
-| `/blog/[slug]/` | コラム記事詳細 |
-| `/blog/category/[cat]/` | カテゴリ別記事一覧 |
+| `/column/` | コラム記事一覧 |
+| `/column/[slug]/` | コラム記事詳細 |
+| `/column/category/[cat]/` | カテゴリ別記事一覧 |
 | `/contact/` | お問い合わせ独立ページ |
 
 ## Key Architecture Patterns
@@ -37,7 +37,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### microCMS データフロー
 - `lib/microcms.ts` に全APIアクセス関数を集約
 - Blog の `category` は `string[]`（microCMS側でリスト型）
-- `isExternal=true` の記事は `noteUrl` への外部リンク、`false` は内部記事（`/blog/[slug]`）
+- `isExternal=true` の記事は `noteUrl` への外部リンク、`false` は内部記事（`/column/[slug]`）
 - `tags` はカンマ区切りテキスト → `.split(",")` で配列化
 - Webhook（`/api/revalidate`）でmicroCMS更新時にISR revalidate
 
@@ -50,7 +50,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 共通設定は `hooks/animations.ts`（spring configs, easings, stagger variants）
 
 ### 各独立ページの構成
-すべての独立ページ（/about, /works, /blog, /contact, 詳細ページ）は `<Nav />` と `<Footer />` を自前で配置。layout.tsxには含まれていない。
+すべての独立ページ（/about, /works, /column, /contact, 詳細ページ）は `<Nav />` と `<Footer />` を自前で配置。layout.tsxには含まれていない。
 
 ## microCMS
 - 環境変数: `MICROCMS_SERVICE_DOMAIN`, `MICROCMS_API_KEY`, `MICROCMS_WEBHOOK_SECRET`

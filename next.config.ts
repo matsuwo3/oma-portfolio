@@ -9,6 +9,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/blog",
+        destination: "/column",
+        permanent: true,
+      },
+      {
+        source: "/blog/:path*",
+        destination: "/column/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

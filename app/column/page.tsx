@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   description:
     "美容クリニックマーケティング、医療広告、SEOなどに関するナレッジを発信。伴走型医療マーケター「おま」のコラム記事一覧。",
   alternates: {
-    canonical: `${SITE_URL}/blog/`,
+    canonical: `${SITE_URL}/column/`,
   },
   openGraph: {
     type: "website",
     title: "コラム｜おま 伴走型医療マーケター",
     description:
       "美容クリニックマーケティング、医療広告、SEOなどに関するナレッジを発信。",
-    url: `${SITE_URL}/blog/`,
+    url: `${SITE_URL}/column/`,
     siteName: "おま｜伴走型医療マーケター",
   },
 };
@@ -46,7 +46,7 @@ export default async function BlogPage() {
           {/* Category Links */}
           <div className="mt-8 flex flex-wrap gap-2">
             <Link
-              href="/blog/"
+              href="/column/"
               className="rounded-full bg-text-primary px-5 py-2 text-sm font-medium text-white shadow-sm"
             >
               All
@@ -54,7 +54,7 @@ export default async function BlogPage() {
             {categories.map((cat) => (
               <Link
                 key={cat}
-                href={`/blog/category/${encodeURIComponent(cat)}/`}
+                href={`/column/category/${encodeURIComponent(cat)}/`}
                 className="rounded-full bg-white px-5 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04] transition-colors hover:bg-black/[0.02]"
               >
                 {cat}

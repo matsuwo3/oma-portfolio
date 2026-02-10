@@ -95,7 +95,7 @@ function BlogCard({ post }: { post: BlogPost }) {
           {cardContent}
         </a>
       ) : (
-        <Link href={`/blog/${post.slug}`} className={cardClassName}>
+        <Link href={`/column/${post.slug}`} className={cardClassName}>
           {cardContent}
         </Link>
       )}
@@ -124,10 +124,10 @@ export function BlogGrid({ posts }: Props) {
         ))}
       </motion.div>
 
-      {/* CTA → /blog/ */}
+      {/* CTA → /column/ */}
       <div className="mt-8">
         <MagneticButton
-          href="/blog/"
+          href="/column/"
           className="inline-flex h-14 items-center gap-2 rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80 md:text-base"
           strength={0.25}
         >

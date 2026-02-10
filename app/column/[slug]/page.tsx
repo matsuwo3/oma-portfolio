@@ -33,13 +33,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${post.title}｜おまコラム`,
     description,
     alternates: {
-      canonical: `${SITE_URL}/blog/${slug}`,
+      canonical: `${SITE_URL}/column/${slug}`,
     },
     openGraph: {
       type: "article",
       title: post.title,
       description,
-      url: `${SITE_URL}/blog/${slug}`,
+      url: `${SITE_URL}/column/${slug}`,
       siteName: "おま｜伴走型医療マーケター",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
@@ -139,7 +139,7 @@ export default async function BlogDetailPage({ params }: Props) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${SITE_URL}/blog/${slug}`,
+      "@id": `${SITE_URL}/column/${slug}`,
     },
     ...(post.thumbnail && {
       image: {
@@ -162,7 +162,7 @@ export default async function BlogDetailPage({ params }: Props) {
         <article className="mx-auto w-full max-w-2xl">
           {/* Back link */}
           <Link
-            href="/blog/"
+            href="/column/"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
