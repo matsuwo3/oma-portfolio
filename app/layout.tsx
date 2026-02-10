@@ -57,8 +57,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               url: "https://oma-pj.com/about/",
               sameAs: [
                 "https://note.com/nakanto_survey",
-                "https://x.com/oma_and_and",
+                "https://x.com/nakahito_survey",
               ],
+              worksFor: {
+                "@type": "Organization",
+                name: "株式会社Zangle",
+                url: "https://zangle.co.jp",
+              },
               knowsAbout: [
                 "美容クリニックマーケティング",
                 "医療広告ガイドライン",

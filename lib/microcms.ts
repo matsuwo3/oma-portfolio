@@ -44,3 +44,17 @@ export async function getBlogPostBySlug(slug: string) {
   const posts = await getBlogPosts();
   return posts.find((p) => p.slug === slug) ?? null;
 }
+
+export async function getBlogCategories() {
+  const posts = await getBlogPosts();
+  const categorySet = new Set<string>();
+  posts.forEach((post) => {
+    post.category.forEach((cat) => categorySet.add(cat));
+  });
+  return Array.from(categorySet);
+}
+
+export async function getBlogPostsByCategory(category: string) {
+  const posts = await getBlogPosts();
+  return posts.filter((post) => post.category.includes(category));
+}

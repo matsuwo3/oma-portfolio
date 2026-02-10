@@ -1,17 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Works", href: "#works" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about/", scrollTarget: "#about" },
+  { label: "Works", href: "/#works", scrollTarget: "#works" },
+  { label: "Blog", href: "/blog/", scrollTarget: "#blog" },
+  { label: "Contact", href: "/contact/", scrollTarget: "#contact" },
 ];
 
 export function Nav() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -21,12 +25,17 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (link: (typeof navLinks)[number]) => {
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+
+    if (isHome) {
+      const el = document.querySelector(link.scrollTarget);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
     }
+    // Non-home pages navigate via Link (handled by the <Link> element)
   };
 
   return (
@@ -39,14 +48,7 @@ export function Nav() {
         }`}
       >
         {/* Logo */}
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          className="flex items-center gap-2"
-        >
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src="/icon.webp"
             alt="おま"
@@ -57,19 +59,29 @@ export function Nav() {
           <span className="text-sm font-semibold tracking-tight text-text-primary">
             おまポートフォリオ
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className="rounded-xl px-3.5 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-black/[0.04] hover:text-text-primary"
-            >
-              {link.label}
-            </button>
-          ))}
+          {navLinks.map((link) =>
+            isHome ? (
+              <button
+                key={link.label}
+                onClick={() => handleNavClick(link)}
+                className="rounded-xl px-3.5 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-black/[0.04] hover:text-text-primary"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="rounded-xl px-3.5 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-black/[0.04] hover:text-text-primary"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -128,15 +140,26 @@ export function Nav() {
             transition={{ duration: 0.2 }}
             className="absolute top-[72px] left-4 right-4 z-40 rounded-2xl bg-white/90 p-2 shadow-lg shadow-black/[0.06] backdrop-blur-xl md:hidden"
           >
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                className="block w-full rounded-xl px-4 py-3 text-left text-sm font-medium text-text-secondary transition-colors hover:bg-black/[0.04] hover:text-text-primary"
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              isHome ? (
+                <button
+                  key={link.label}
+                  onClick={() => handleNavClick(link)}
+                  className="block w-full rounded-xl px-4 py-3 text-left text-sm font-medium text-text-secondary transition-colors hover:bg-black/[0.04] hover:text-text-primary"
+                >
+                  {link.label}
+                </button>
+              ) : (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block w-full rounded-xl px-4 py-3 text-left text-sm font-medium text-text-secondary transition-colors hover:bg-black/[0.04] hover:text-text-primary"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </motion.div>
         )}
       </AnimatePresence>

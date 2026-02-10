@@ -13,12 +13,28 @@
 - `npm run build`: ビルド
 - `npm run lint`: ESLint
 
+## URL設計
+| URL | 概要 |
+|---|---|
+| `/` | トップページ（全セクション） |
+| `/about/` | E-E-A-T強化の独立プロフィールページ |
+| `/works/[slug]/` | 実績詳細 |
+| `/blog/` | ブログ記事一覧 |
+| `/blog/[slug]/` | ブログ記事詳細 |
+| `/blog/category/[cat]/` | カテゴリ別記事一覧 |
+| `/contact/` | お問い合わせ独立ページ |
+
 ## Architecture
 - /app
   - /page.tsx              → トップページ（ScrollProgress, MorphingBlob, 全セクション）
+  - /about/page.tsx        → Aboutページ（プロフィール、経歴タイムライン、JSON-LD ProfilePage）
   - /works/[slug]/page.tsx → 実績詳細
+  - /blog/page.tsx         → ブログ記事一覧（カテゴリフィルタ付き）
   - /blog/[slug]/page.tsx  → ブログ記事詳細
-  - /layout.tsx            → 共通レイアウト（Nav, Footer）
+  - /blog/category/[cat]/page.tsx → カテゴリ別記事一覧
+  - /blog/BlogListClient.tsx → ブログ一覧用クライアントコンポーネント（blog/とcategory/で共有）
+  - /contact/page.tsx      → お問い合わせページ
+  - /layout.tsx            → 共通レイアウト（Person型JSON-LD）
   - /api/revalidate/route.ts → microCMS Webhook受信
 - /components
   - /sections  → Hero, About, Works, WorksGrid, Blog, BlogGrid, Contact

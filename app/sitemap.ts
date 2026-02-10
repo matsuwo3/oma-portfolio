@@ -1,10 +1,14 @@
 import type { MetadataRoute } from "next";
-import { getWorks, getBlogPosts } from "@/lib/microcms";
+import { getWorks, getBlogPosts, getBlogCategories } from "@/lib/microcms";
 
 const SITE_URL = "https://oma-pj.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [works, posts] = await Promise.all([getWorks(), getBlogPosts()]);
+  const [works, posts, categories] = await Promise.all([
+    getWorks(),
+    getBlogPosts(),
+    getBlogCategories(),
+  ]);
 
   const workEntries: MetadataRoute.Sitemap = works.map((work) => ({
     url: `${SITE_URL}/works/${encodeURIComponent(work.slug)}`,
@@ -22,6 +26,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }));
 
+  const categoryEntries: MetadataRoute.Sitemap = categories.map((cat) => ({
+    url: `${SITE_URL}/blog/category/${encodeURIComponent(cat)}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
+
   return [
     {
       url: SITE_URL,
@@ -29,7 +40,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 1.0,
     },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
     ...workEntries,
     ...blogEntries,
+    ...categoryEntries,
   ];
 }
