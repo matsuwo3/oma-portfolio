@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
   }
 
   revalidatePath("/");
+  revalidatePath("/works", "page");
   revalidatePath("/works/[slug]", "page");
   revalidatePath("/column", "page");
   revalidatePath("/column/[slug]", "page");
