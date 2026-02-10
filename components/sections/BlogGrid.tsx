@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import type { BlogPost } from "@/lib/types";
 import { TiltCard } from "@/components/ui/TiltCard";
@@ -105,14 +104,12 @@ function BlogCard({ post }: { post: BlogPost }) {
 }
 
 export function BlogGrid({ posts }: Props) {
-  const [expanded, setExpanded] = useState(false);
+  const displayPosts = posts.slice(0, INITIAL_COUNT);
   const hasMore = posts.length > INITIAL_COUNT;
-  const initialPosts = posts.slice(0, INITIAL_COUNT);
-  const extraPosts = posts.slice(INITIAL_COUNT);
 
   return (
     <>
-      {/* First 5 articles */}
+      {/* Articles (max 5) */}
       <motion.div
         className="mt-10 grid gap-4"
         variants={staggerContainer(0.06)}
@@ -120,63 +117,21 @@ export function BlogGrid({ posts }: Props) {
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
       >
-        {initialPosts.map((post) => (
+        {displayPosts.map((post) => (
           <motion.div key={post.id} variants={fadeUpChild} className="min-w-0">
             <BlogCard post={post} />
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Expanded articles (6+) */}
-      <AnimatePresence>
-        {expanded && extraPosts.length > 0 && (
-          <motion.div
-            className="mt-4 grid gap-4"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={staggerContainer(0.06)}
-          >
-            {extraPosts.map((post) => (
-              <motion.div
-                key={post.id}
-                className="min-w-0"
-                variants={fadeUpChild}
-              >
-                <BlogCard post={post} />
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* CTAs */}
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        {hasMore && !expanded && (
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            onClick={() => setExpanded(true)}
-            className="inline-flex h-14 items-center gap-2 rounded-full border border-black/10 px-10 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] md:text-base"
-          >
-            もっと見る
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M3 5.5L7 9.5L11 5.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </motion.button>
-        )}
+      {/* CTA → /blog/ */}
+      <div className="mt-8">
         <MagneticButton
           href="/blog/"
           className="inline-flex h-14 items-center gap-2 rounded-full bg-text-primary px-10 text-sm font-semibold text-white transition-opacity hover:opacity-80 md:text-base"
           strength={0.25}
         >
-          ブログ一覧を見る
+          {hasMore ? "もっと見る" : "ブログ一覧を見る"}
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path
               d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5"
