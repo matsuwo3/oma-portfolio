@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TiltCard } from "@/components/ui/TiltCard";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const bentoCards = [
@@ -25,50 +27,6 @@ const bentoCards = [
     description: "Webアプリ、LP制作、AI業務効率化、システム要件定義",
     accent: "bg-accent-violet",
   },
-];
-
-const skills = [
-  "Google Ads",
-  "LINE Ads",
-  "TikTok Ads",
-  "Meta Ads",
-  "SEO / MEO",
-  "CRM / MA",
-  "Python",
-  "SQL / BigQuery",
-  "Next.js",
-  "React",
-  "AI / LLM",
-  "Figma",
-];
-
-const careers = [
-  {
-    accent: "text-accent-blue",
-    text: "従業員数100名超のWEB広告代理店にてストラテジックプランニングと制作、運用を担当",
-  },
-  {
-    accent: "text-accent-orange",
-    text: "年間売上900億円規模の大手美容外科グループにてマーケティング統括。全国100院以上の広告戦略を統括",
-  },
-  {
-    accent: "text-accent-violet",
-    text: "外資系コンサルティングファームにて会社のリブランディングPJに従事",
-  },
-  {
-    accent: "text-accent-teal",
-    text: "独立後、累計30院の美容クリニック・歯科医院のマーケティングを支援。広告運用額は年間50億円",
-  },
-];
-
-const industries = [
-  "クリニック",
-  "歯科",
-  "整体・エステ",
-  "人材派遣",
-  "百貨店・小売",
-  "自動車",
-  "不動産",
 ];
 
 export function About() {
@@ -113,36 +71,6 @@ export function About() {
           必要なら何でもやる伴走型の支援スタイルで、事業フェーズに合わせた成長を実現します。
         </motion.p>
 
-        {/* Career Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15, duration: 0.5 }}
-          className="mt-12"
-        >
-          <p className="mb-4 text-xs font-semibold tracking-wider text-text-secondary md:text-sm">
-            CAREER
-          </p>
-          <div className="grid gap-3 md:grid-cols-2">
-            {careers.map((career, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06, duration: 0.5 }}
-                className="flex items-start gap-3 rounded-2xl bg-white p-5 shadow-sm shadow-black/[0.04]"
-              >
-                <span className={`mt-0.5 text-lg font-bold leading-none ${career.accent}`}>—</span>
-                <p className="text-sm leading-relaxed text-text-primary md:text-base">
-                  {career.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Bento Grid with 3D tilt */}
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {bentoCards.map((card, i) => (
@@ -173,54 +101,30 @@ export function About() {
           ))}
         </div>
 
-        {/* Industries */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15, duration: 0.5 }}
-          className="mt-10"
-        >
-          <p className="mb-3 text-xs font-semibold tracking-wider text-text-secondary md:text-sm">
-            支援業界
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {industries.map((industry) => (
-              <motion.span
-                key={industry}
-                className="rounded-xl border border-black/[0.06] bg-white px-4 py-2 text-sm font-medium text-text-primary md:text-base"
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                {industry}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Skills with hover effect */}
+        {/* CTA to /about/ */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="mt-8"
+          className="mt-10"
         >
-          <p className="mb-3 text-xs font-semibold tracking-wider text-text-secondary md:text-sm">
-            SKILLS & TOOLS
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <motion.span
-                key={skill}
-                className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-text-secondary shadow-sm shadow-black/[0.04] md:text-base"
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                {skill}
-              </motion.span>
-            ))}
-          </div>
+          <MagneticButton
+            href="/about/"
+            className="inline-flex h-14 items-center gap-2 rounded-full border border-black/10 px-10 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] md:text-base"
+            strength={0.2}
+          >
+            経歴・スキルをもっと見る
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </MagneticButton>
         </motion.div>
       </div>
     </section>

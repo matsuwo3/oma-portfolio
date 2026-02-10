@@ -85,8 +85,24 @@ export function Contact() {
             </MagneticButton>
           </div>
 
-          {/* SNS Links */}
+          {/* SNS Links + Contact Page */}
           <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+            <MagneticButton
+              href="/contact/"
+              className="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full border border-black/10 px-8 text-sm font-semibold text-text-primary transition-colors hover:bg-black/[0.03] sm:w-auto md:text-base"
+              strength={0.15}
+            >
+              お問い合わせページへ
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </MagneticButton>
             {links.map((link) => (
               <MagneticButton
                 key={link.label}

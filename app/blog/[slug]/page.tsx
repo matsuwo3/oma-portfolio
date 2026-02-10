@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
 import { getBlogPosts, getBlogPostBySlug } from "@/lib/microcms";
 
 const SITE_URL = "https://oma-pj.com";
@@ -154,11 +156,12 @@ export default async function BlogDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="min-h-screen px-6 pt-12 pb-24">
+      <Nav />
+      <div className="min-h-screen px-6 pt-28 pb-24">
         <article className="mx-auto w-full max-w-2xl">
           {/* Back link */}
           <Link
-            href="/#blog"
+            href="/blog/"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -252,6 +255,7 @@ export default async function BlogDetailPage({ params }: Props) {
           />
         </article>
       </div>
+      <Footer />
     </>
   );
 }
