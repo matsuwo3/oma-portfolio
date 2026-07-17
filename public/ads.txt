@@ -1,0 +1,2 @@
+google.com, pub-5042919012303029, DIRECT, f08c47fec0942fa0
+subdomain=asadashi.oma-pj.com
